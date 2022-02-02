@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:quiz/Btn/answer_button.dart';
+import 'package:quiz/widget/question.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,21 +12,70 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var questionIndex = 0;
+  var _questionIndex = 0;
 
-  void answerQuestion() {
+  void _answerQuestion() {
     setState(() {
-      questionIndex = questionIndex + 1;
+      _questionIndex = _questionIndex + 1;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     var questions = [
-      'Your favorite singer?',
-      'Your favorite season?',
-      'Your favorite animal?',
+      {
+        'Q': 'Who is your favorite singre?',
+        'A': [
+          'Taylor Swift',
+          'Cavetown',
+          'Lord Huron',
+          'Alex Turner',
+          'none.',
+        ],
+      },
+      {
+        'Q': 'What kind of music do you listen to?',
+        'A': [
+          'Pop',
+          'Alternative',
+          'Jazz',
+          'Indie',
+          'Rock',
+        ],
+      },
+      {
+        'Q': 'Choose a band.',
+        'A': [
+          'Archive',
+          'The Strokes',
+          'The Beatles',
+          'Arctic Monkeys',
+          'none.',
+        ],
+      },
+      {
+        'Q': 'Your Favorite song by Taylor Swift?',
+        'A': [
+          'Seven',
+          'All Too Well',
+          'Sad Beautiful Tragic',
+          'Champagne Problems',
+          'I donno these songs :( ',
+        ],
+      },
+      {
+        'Q': 'Which one is your guilty pleasure?',
+        'A': [
+          'Kpop',
+          'Justin Bieber',
+          'Persian Pop',
+          'One Direction',
+          'I listen to them normally.',
+        ],
+      },
     ];
+
+    //...
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -37,35 +87,16 @@ class _MyAppState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.center,
           // ignore: prefer_const_literals_to_create_immutables
           children: [
-            Text(
-              questions[questionIndex],
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+            Qusetion(
+              questions[_questionIndex]['Q'].toString(),
             ),
             SizedBox(height: 25),
-            AnswerButton(
-              txt: 'a',
-              answer: () {
-                answerQuestion();
-                print('a');
-              },
-            ),
-            AnswerButton(
-              txt: 'b',
-              answer: () {
-                answerQuestion();
-                print('b');
-              },
-            ),
-            AnswerButton(
-              txt: 'c',
-              answer: () {
-                answerQuestion();
-                print('c');
-              },
-            ),
+            ...(questions[_questionIndex]['A'] as List).map((answer) {
+              return AnswerButton(
+                txt: answer,
+                answer: _answerQuestion,
+              );
+            }).toList(),
           ],
         ),
       ),
