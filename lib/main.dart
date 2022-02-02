@@ -17,59 +17,144 @@ class _MyAppState extends State<MyApp> {
     {
       'Q': 'Who is your favorite singre?',
       'A': [
-        'Taylor Swift',
-        'Cavetown',
-        'Lord Huron',
-        'Alex Turner',
-        'none.',
+        {
+          'text': 'Taylor Swift',
+          'score': 3,
+        },
+        {
+          'text': 'Cavetown',
+          'score': 1,
+        },
+        {
+          'text': 'Lord Huron',
+          'score': 2,
+        },
+        {
+          'text': 'Alex Turner',
+          'score': 4,
+        },
+        {
+          'text': 'none.',
+          'score': 5,
+        },
       ],
     },
     {
       'Q': 'What kind of music do you listen to?',
       'A': [
-        'Pop',
-        'Alternative',
-        'Jazz',
-        'Indie',
-        'Rock',
+        {
+          'text': 'Pop',
+          'score': 5,
+        },
+        {
+          'text': 'Alternative',
+          'score': 3,
+        },
+        {
+          'text': 'Jazz',
+          'score': 1,
+        },
+        {
+          'text': 'Indie',
+          'score': 2,
+        },
+        {
+          'text': 'Rock',
+          'score': 4,
+        },
       ],
     },
     {
       'Q': 'Choose a band.',
       'A': [
-        'Archive',
-        'The Strokes',
-        'The Beatles',
-        'Arctic Monkeys',
-        'none.',
+        {
+          'text': 'Archive',
+          'score': 4,
+        },
+        {
+          'text': 'The Strokes',
+          'score': 2,
+        },
+        {
+          'text': 'The Beatles',
+          'score': 3,
+        },
+        {
+          'text': 'Arctic Monkeys',
+          'score': 1,
+        },
+        {
+          'text': 'none.',
+          'score': 5,
+        },
       ],
     },
     {
       'Q': 'Your Favorite song by Taylor Swift?',
       'A': [
-        'Seven',
-        'All Too Well',
-        'Sad Beautiful Tragic',
-        'Champagne Problems',
-        'I donno these songs :( ',
+        {
+          'text': 'Seven',
+          'score': 2,
+        },
+        {
+          'text': 'All Too Well',
+          'score': 4,
+        },
+        {
+          'text': 'Sad Beautiful Tragic',
+          'score': 1,
+        },
+        {
+          'text': 'Champagne Problems',
+          'score': 3,
+        },
+        {
+          'text': 'I donno these songs :( ',
+          'score': 5,
+        },
       ],
     },
     {
       'Q': 'Which one is your guilty pleasure?',
       'A': [
-        'Kpop',
-        'Justin Bieber',
-        'Persian Pop',
-        'One Direction',
-        'I listen to them normally.',
+        {
+          'text': 'Kpop',
+          'score': 1,
+        },
+        {
+          'text': 'Justin Bieber',
+          'score': 3,
+        },
+        {
+          'text': 'Persian Pop',
+          'score': 4,
+        },
+        {
+          'text': 'One Direction',
+          'score': 2,
+        },
+        {
+          'text': 'I listen to them normally.',
+          'score': 5,
+        },
       ],
     },
   ];
 
 //...
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerQuestion() {
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  void _answerQuestion(int score) {
+    _totalScore += score;
+
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
@@ -97,7 +182,10 @@ class _MyAppState extends State<MyApp> {
                 questionIndex: _questionIndex,
                 answerQuestion: _answerQuestion,
               )
-            : Result(),
+            : Result(
+                resultScore: _totalScore,
+                reset: _resetQuiz,
+              ),
       ),
     );
   }

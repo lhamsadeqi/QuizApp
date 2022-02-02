@@ -26,10 +26,11 @@ class Quiz extends StatelessWidget {
           questions[questionIndex]['Q'].toString(),
         ),
         SizedBox(height: 25),
-        ...(questions[questionIndex]['A'] as List).map((answer) {
+        ...(questions[questionIndex]['A'] as List<Map<String, Object>>)
+            .map((answer) {
           return AnswerButton(
-            txt: answer,
-            answer: answerQuestion,
+            txt: answer['text'].toString(),
+            answer: () => answerQuestion(answer['score']),
           );
         }).toList(),
       ],
