@@ -46,7 +46,7 @@ class Result extends StatelessWidget {
             child: Text(
               'restart',
               style: TextStyle(
-                color: Colors.purple[700],
+                color: Colors.blue[900],
                 fontWeight: FontWeight.bold,
               ),
             ),

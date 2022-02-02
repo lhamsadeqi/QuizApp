@@ -170,8 +170,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     //...
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
           elevation: 0,
           centerTitle: true,
           title: Text('Vibe Check'),
